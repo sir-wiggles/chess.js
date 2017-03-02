@@ -1560,6 +1560,9 @@ var Chess = function(fen) {
       var sloppy = (typeof options !== 'undefined' && 'sloppy' in options) ?
                     options.sloppy : false;
 
+      var readonly = (typeof options !== 'undefined' && 'readonly' in options) ?
+          options.readonly : false;
+
       var move_obj = null;
 
       if (typeof move === 'string') {
@@ -1589,7 +1592,9 @@ var Chess = function(fen) {
        */
       var pretty_move = make_pretty(move_obj);
 
-      make_move(move_obj);
+      if (!readonly) {
+          make_move(move_obj);
+      }
 
       return pretty_move;
     },
